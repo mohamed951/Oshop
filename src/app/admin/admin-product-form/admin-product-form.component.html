@@ -33,7 +33,7 @@
       </div>
       <div class="form-group">
         <label for="imageUrl">Image URL</label>
-        <input [(ngModel)]="product.url" #imgUrl="ngModel" ngModel name="imageUrl" id="imageUrl" type="text" class="form-control" required url>
+        <input [(ngModel)]="product.imageUrl" #imgUrl="ngModel" ngModel name="imageUrl" id="imageUrl" type="text" class="form-control" required url>
         <div class="alert alert-danger" *ngIf="imgUrl.touched && imgUrl.invalid">
           <div *ngIf="imgUrl.errors.required">
             Img URL is required.
@@ -44,15 +44,14 @@
         </div>
       </div>
       <button class="btn btn-primary">Save</button>
+      <button type="button" (click)="delete()" class="btn btn-danger">Delete</button>
     </form>
   </div>
   <div class="col-md-6">
-    <div class="card" style="width: 18rem;">
-      <img [src]="imgUrl.value" class="card-img-top">
-      <div class="card-body">
-        <h5 class="card-title">{{ title.value }}</h5>
-        <p class="card-text">Price: {{ price.value | currency:'USD'}} </p>
-      </div>
-    </div>
+        <product-card 
+          [product]="product"
+          [show-actions]="false"
+          >
+        </product-card>
   </div>
 </div>

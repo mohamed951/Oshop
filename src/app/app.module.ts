@@ -8,6 +8,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireModule } from '@angular/fire';
 import { FormsModule } from '@angular/forms'
 import { CustomFormsModule } from 'ng2-validation'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -26,6 +27,11 @@ import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { AdminGuardService } from './services/admin-guard/admin-guard.service';
 import { CategoryService } from './services/category/category.service';
 import { ProductsService } from './services/products/products.service';
+import { ProductTableComponent } from './product-table/product-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { ProductCardComponent } from './product-card/product-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +45,9 @@ import { ProductsService } from './services/products/products.service';
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    AdminProductFormComponent
+    AdminProductFormComponent,
+    ProductTableComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
@@ -49,8 +57,9 @@ import { ProductsService } from './services/products/products.service';
     AngularFireDatabaseModule,
     FormsModule,
     CustomFormsModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
-      { path:'', component: HomeComponent },
+      { path:'', component: ProductsComponent },
       { path:'login', component: LoginComponent },
       { path:'products', component: ProductsComponent },
       { path:'shopping-cart', component: ShoppingCartComponent },
@@ -60,11 +69,14 @@ import { ProductsService } from './services/products/products.service';
       { path:'my/orders', component: MyOrdersComponent, canActivate:[ AuthGuardService ] },
 
       { path:'admin/products', component: AdminProductsComponent, canActivate:[ AuthGuardService, AdminGuardService ] },
-      { path:'admin/orders/:id', component: AdminProductFormComponent, canActivate:[ AuthGuardService , AdminGuardService  ] },
+      { path:'admin/products/:id', component: AdminProductFormComponent, canActivate:[ AuthGuardService , AdminGuardService  ] },
       { path:'admin/orders/new', component: AdminProductFormComponent, canActivate:[ AuthGuardService , AdminGuardService  ] },
       { path:'admin/orders', component: AdminOrdersComponent, canActivate:[ AuthGuardService , AdminGuardService  ] },
       
-    ])
+    ]),
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     AuthService,
